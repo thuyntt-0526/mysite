@@ -22,7 +22,6 @@ class Book(models.Model):
                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
                                       '">ISBN number</a>')
 
-
     genre = models.ManyToManyField(Genre, help_text="Select a genre for this book")
 
     def __str__(self):
@@ -33,6 +32,12 @@ class Book(models.Model):
         """Returns the URL to access a detail record for this book."""
         return reverse('book-detail', args=[str(self.id)])
     
+    def display_genre(self):
+        """Create a string for the Genre. This is required to display genre in Admin."""
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+    
+    display_genre.short_description = 'Genre'
+
 class BookInstance(models.Model):
 
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
