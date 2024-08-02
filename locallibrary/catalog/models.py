@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 import uuid
-from .constants import LOAN_STATUS
+from .constants import LoanStatus
 from django.utils.translation import gettext
 
 class Genre(models.Model):
@@ -51,7 +51,7 @@ class BookInstance(models.Model):
 
     status = models.CharField(
         max_length=1,
-        choices=LOAN_STATUS,
+        choices=LoanStatus.get_status(),
         blank=True,
         default='m',
         help_text=gettext('Book availability'),
