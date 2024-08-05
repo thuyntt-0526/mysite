@@ -10,3 +10,5 @@ class LoanStatus(Enum):
     @classmethod
     def get_status(cls):
         return [(key.value, key.name.capitalize()) for key in cls]
+
+PAGINATE_NUM = 10
